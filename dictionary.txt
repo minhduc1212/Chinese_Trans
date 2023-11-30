@@ -1,6 +1,0 @@
-sample=mẫu
-paragraph=đoạn
-test=kiểm tra
-word=từ
-replacement=thay thế
-tool=công cụ

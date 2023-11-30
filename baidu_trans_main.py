@@ -3,7 +3,6 @@ from selenium import webdriver
 #import By
 from selenium.webdriver.common.by import By
 from time import sleep
-import clipboard
 import os
 
 def save_the_text(i):
@@ -14,6 +13,7 @@ def save_the_text(i):
         f.write(txt_div.text + ' ')
     sleep(2)
     input_box.clear()
+    
 def error_paragraph(paragraph, i):
     with open(f'E:/LT/Trans/output/error_paragraph_{i}.txt', 'a', encoding='utf-8') as f:
         f.write(paragraph)
@@ -24,8 +24,6 @@ with open('test.txt', 'r', encoding="utf-8") as f:
     # chia thành từng đoạn 1000 ký tự
     paragraphs = [paragraph[i:i+1000] for i in range(0, len(paragraph), 1000)]
 
-#open the browser
-#head-less mode
 driver = webdriver.Chrome()
 driver.get("https://fanyi.baidu.com/#zh/vie/")
 sleep(1)
