@@ -1,3 +1,19 @@
+def capitalize_after_punctuation(string):
+    punctuations = ['\n', '.', ',', '?', '!', "'", '"', ':', ';', '(', ')', '“', '”', '‘', '’']
+    sentences = string.split('. ')
+
+    for i in range(len(sentences)):
+        sentence = sentences[i]
+        for punctuation in punctuations:
+            if punctuation in sentence:
+                words = sentence.split(punctuation)
+                for j in range(len(words)):
+                    if words[j].strip() != '':
+                        words[j] = words[j].strip().capitalize()
+                sentences[i] = punctuation.join(words)
+
+    return '. '.join(sentences)
+
 data_ch = set()
 phrase_dict = {}
 
@@ -10,6 +26,12 @@ with open('Vietphrase_new.txt', 'r', encoding='utf-8') as f:
 with open('test.txt', 'r', encoding='utf-8') as f:
     for line in f:
         positions = [index for index, character in enumerate(line) if character not in data_ch]
+
+        line = line.replace(' 、', '.')
+        line = line.replace('，', '.')
+        line = line.replace('。', '.')
+        line = line.replace('」', '"')
+        line = line.replace('「', '"')
 
         phrase_list = []
         for p in range(len(positions)):
@@ -43,14 +65,27 @@ with open('test.txt', 'r', encoding='utf-8') as f:
                             y_list.append(y)
                             break
         result = ' '.join([phrase_dict.get(phrase, phrase) if phrase in phrase_dict else phrase for phrase in phrase_list])
-        result = ' '.join([phrase_dict.get(phrase, phrase) if phrase in phrase_dict else phrase for phrase in phrase_list])
 
-        result = result.replace('，', ',')
-        result = result.replace(' .', '.')
-        result = result.replace(' ,', ',')
+        result = capitalize_after_punctuation(result)
+
+        result = result.replace('，', ', ')
+        result = result.replace(' . ', '. ')
+        result = result.replace(' , ', ', ')
         result = result.replace('  ', ' ')
-        result = result.replace(' !', '!')
-        result = result.replace(' ?', '?')
+        result = result.replace(' ! ', '! ')
+        result = result.replace(' ? ', '? ')
+        result = result.replace(' : ', ': ')
+        result = result.replace(' ; ', '; ')
+        result = result.replace(' ) ', ') ')
+        result = result.replace('( ', '(')
+        result = result.replace('“ ', '“')
+        result = result.replace(' ”', '”')
+        result = result.replace(' ‘', '‘')
+        result = result.replace('’ ', '’')
+        result = result.replace(' 、', ',')
+        result = result.replace('.', '. ')
+        result = result.replace(',', ', ')
 
         with open('result.txt', 'a', encoding='utf-8') as f:
-            f.write(result + '\n')
+            result = result.replace('  ', ' ')
+            f.write(result+'\n')
