@@ -6,7 +6,7 @@ from time import sleep
 import os
 
 def save_the_text(i):
-    txt_div = driver.find_element(By.CLASS_NAME, "output-bd")
+    txt_div = driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div/div[1]/div/div[2]/div[2]/div[2]/div/div[1]")
     sleep(1)
     #save to file
     with open(f"E:/LT/Trans/output/result_{i}.txt", 'a', encoding='utf-8') as f:
@@ -25,11 +25,11 @@ with open('test.txt', 'r', encoding="utf-8") as f:
     paragraphs = [paragraph[i:i+1000] for i in range(0, len(paragraph), 1000)]
 
 driver = webdriver.Chrome()
-driver.get("https://fanyi.baidu.com/#zh/vie/")
+driver.get("https://fanyi.baidu.com/mtpe-individual/multimodal#/zh/vie/")
 sleep(1)
 
 for paragraph, i in zip(paragraphs, range(1, len(paragraphs) + 1 )):
-    input_box = driver.find_element(By.TAG_NAME, "textarea")
+    input_box = driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div/div")
     input_box.send_keys(paragraph)
     try:
         sleep(2)
@@ -47,7 +47,7 @@ for paragraph, i in zip(paragraphs, range(1, len(paragraphs) + 1 )):
         try:
             driver.refresh()
             sleep(5)
-            input_box = driver.find_element(By.TAG_NAME, "textarea")
+            input_box = driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div/div")
             input_box.send_keys(paragraph)
             sleep(5)
             save_the_text(i)
