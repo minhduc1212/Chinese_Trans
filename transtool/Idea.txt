@@ -1,2 +1,0 @@
-6/4/2024: Thêm chia các từ theo các nhóm từ rồi ghép chúng theo trận tự từ.
-14/6/2024: Có quá nhiều trường hợp và quá rắc rối nên dùng ý tưởng ban đầu chia theo dấu . dấu , và các từ ko có trong data. Sau đó nếu thấy cụm từ không có trong data mà liền nhau thì ghép chúng vào thành 1 cụm.
